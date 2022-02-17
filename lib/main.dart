@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool data =  false;
   int myAmount = 0;
   final myAddress = "0x4140ea959e651C81a53261968Da11b12197EaD60";
-  var txHash;
+  late String txHash;
   var myData;
 
   @override
@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<DeployedContract> loadContract() async{
     String abi = await rootBundle.loadString("assets/abi.json");
-    String contractAddress = "";
+    String contractAddress = "0x90b44241A72cADCc873723c66C7f1fA6EB473C7b";
 
     final contract = DeployedContract(ContractAbi.fromJson(abi, "Wallet"), EthereumAddress.fromHex(contractAddress));
 
@@ -125,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ]))
               .p16
               .white
-              .size(context.screenWidth, context.percentHeight*18)
+              .size(context.screenWidth, context.percentHeight*20)
               .rounded
               .shadowXl
               .make()
@@ -140,6 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ).centered(),
           HStack([
+            // ignore: deprecated_member_use
             FlatButton.icon(
                 onPressed:() => getBalance(myAddress),
                 color: Colors.blue,
@@ -147,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icon(Icons.refresh, color: Colors.white),
                 label: "Refresh".text.white.make()
             ).h(50),
+            // ignore: deprecated_member_use
             FlatButton.icon(
                 onPressed:() => sendCoin(),
                 color: Colors.green,
@@ -154,6 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icon(Icons.call_made_outlined, color: Colors.white),
                 label: "Deposit".text.white.make()
             ).h(50),
+            // ignore: deprecated_member_use
             FlatButton.icon(
                 onPressed:() => withdrawCoin(),
                 color: Colors.red,
@@ -165,7 +168,8 @@ class _MyHomePageState extends State<MyHomePage> {
           alignment: MainAxisAlignment.spaceAround,
           axisSize: MainAxisSize.max,
           ).p16(),
-         if(txHash != null) txHash.text.black.makeCentered().p16()
+          if(txHash != null)
+           txHash.text.black.makeCentered().p16()
         ])
       ])
     );
