@@ -110,15 +110,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
       body: ZStack([
         VxBox()
-            .blue600
+            .purple600
             .size(context.screenWidth, context.percentHeight*30)
             .make(),
         VStack([
           (context.percentHeight * 10).heightBox,
-          "\$Wallet".text.xl4.white.bold.center.makeCentered().py16(),
+          "CRW".text.xl4.white.bold.center.makeCentered().py8(),
             (context.percentHeight * 5).heightBox,
           VxBox(child: VStack([
-            "Balance".text.gray700.xl2.semiBold.makeCentered(),
+            "Balance:".text.gray700.xl2.semiBold.makeCentered(),
             10.heightBox,
             data ? "\$$myData".text.bold.xl6.makeCentered().shimmer()
                 : CircularProgressIndicator().centered()
@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
               .shadowXl
               .make()
               .p16(),
-          30.heightBox,
+          10.heightBox,
           SliderWidget(
             min: 0,
             max: 100,
@@ -139,6 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
               print(myAmount);
             },
           ).centered(),
+          SizedBox(width: 10, height: 10),
           HStack([
             // ignore: deprecated_member_use
             FlatButton.icon(
@@ -152,6 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
             FlatButton.icon(
                 onPressed:() => sendCoin(),
                 color: Colors.green,
+                highlightColor: Colors.greenAccent,
                 shape: Vx.roundedSm,
                 icon: Icon(Icons.call_made_outlined, color: Colors.white),
                 label: "Deposit".text.white.make()
@@ -168,8 +170,19 @@ class _MyHomePageState extends State<MyHomePage> {
           alignment: MainAxisAlignment.spaceAround,
           axisSize: MainAxisSize.max,
           ).p16(),
-          if(txHash != null)
-           txHash.text.black.makeCentered().p16()
+          VxBox(child: VStack([
+            "Transaction hash:".text.gray700.xl.semiBold.makeCentered(),
+            if(txHash != null)
+              txHash.text.black.makeCentered().p8()
+          ]))
+              .p16
+              .purple100
+              .size(context.screenWidth, context.percentHeight*13)
+              .rounded
+              .shadowXl
+              .make()
+              .p16(),
+          10.heightBox,
         ])
       ])
     );
